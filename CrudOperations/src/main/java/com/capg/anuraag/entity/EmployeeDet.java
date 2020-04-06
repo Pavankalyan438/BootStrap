@@ -13,6 +13,7 @@ public class EmployeeDet {
 	private int id;
 	private String name;
 	private int salary;
+	private String phonenumber;
 	private String company;
 	public int getId() {
 		return id;
@@ -32,6 +33,12 @@ public class EmployeeDet {
 	public void setSalary(int salary) {
 		this.salary = salary;
 	}
+	public String getPhonenumber() {
+		return phonenumber;
+	}
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
+	}
 	public String getCompany() {
 		return company;
 	}
@@ -39,6 +46,4 @@ public class EmployeeDet {
 		this.company = company;
 	}
 	
-	
-
 }

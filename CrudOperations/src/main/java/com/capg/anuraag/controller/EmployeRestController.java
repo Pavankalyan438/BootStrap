@@ -3,6 +3,9 @@ package com.capg.anuraag.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +20,7 @@ import com.capg.anuraag.service.EmployeeServiceI;
 
 @RestController
 @RequestMapping("/crud")
-@CrossOrigin("http://localhost:4333")
+@CrossOrigin("http://localhost:4200")
 
 public class EmployeRestController {
 	@Autowired
@@ -27,12 +30,14 @@ public class EmployeRestController {
 		return service.createAccount(emp);	
 	}
 	@GetMapping("/findById/{id}")
-	public EmployeeDet findById(@PathVariable("id") int id) {
-		return service.findById(id);	
+	public  ResponseEntity<EmployeeDet> findById(@PathVariable("id") int id) {
+		EmployeeDet msg=service.findById(id);	
+		return new ResponseEntity<EmployeeDet>(msg,new HttpHeaders(),HttpStatus.OK);
 	}
 	@DeleteMapping("/deleteById/{id}")
-	public String deleteById(@PathVariable int id) {
-		return service.deleteById(id);
+	public ResponseEntity<String>  deleteById(@PathVariable int id) {
+		String msg=service.deleteById(id);
+		return new ResponseEntity<String>(msg,new HttpHeaders(),HttpStatus.OK);
 	}
 	@GetMapping("/fetchAll")
 	public List fetchAll() {
@@ -40,8 +45,9 @@ public class EmployeRestController {
 		
 	}
 	@PostMapping("/update")
-	public String updateEmp(@RequestBody EmployeeDet emp) {
-		return service.updateEmp(emp);
+	public ResponseEntity<String>  updateEmp(@RequestBody EmployeeDet emp) {
+		 String msg=service.updateEmp(emp);
+		 return  new ResponseEntity<String>(msg,new HttpHeaders(),HttpStatus.OK);
 		
 	}
 

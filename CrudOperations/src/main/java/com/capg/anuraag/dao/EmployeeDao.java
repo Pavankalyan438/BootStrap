@@ -28,18 +28,20 @@ public EmployeeDet findById(int id) {
 	return emp;
 }
 @Override
+@Transactional
 public String deleteById(int id) {
 	// TODO Auto-generated method stub
 	EmployeeDet emp=em.find(EmployeeDet.class, id);
-	em.remove(emp);
+	
 	if(emp!=null)
-	{
+	{em.remove(emp);
 		return "Deleted";
 	}
-	return "no such record";
+	else {
+	return "no such record";}
 }
 @Override
-@Transactional
+
 public List fetchAll() {
 	Query q=em.createQuery("select emp from EmployeeDet emp");
 	List l=(List) q.getResultList();
@@ -49,14 +51,18 @@ public List fetchAll() {
 @Transactional
 public String updateEmp(EmployeeDet emp) {
 	EmployeeDet e=em.find(EmployeeDet.class, emp.getId());
-	e.setName(emp.getName());
-	e.setCompany(emp.getCompany());
-	e.setSalary(emp.getSalary());
-	em.merge(e);
+	
 	if(e==null) {
 		return "no such";
+	}else {
+		e.setName(emp.getName());
+		e.setSalary(emp.getSalary());
+		e.setPhonenumber(emp.getPhonenumber());
+		e.setCompany(emp.getCompany());
+		
+		return "updated";
 	}
-	return "updated";
+	
 }
 
 }
